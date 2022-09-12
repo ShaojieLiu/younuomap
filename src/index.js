@@ -8,7 +8,10 @@ const demoUrl = 'http://webst03.is.autonavi.com/appmaptile?style=6&x=0&y=0&z=1'
 
 const baseUrl = 'http://webst03.is.autonavi.com/appmaptile?'
 
-const baseDir = './map/'
+// const baseDir = './map/'
+const baseDir = 'M:/map/'
+
+const queue = new Queue(100)
 
 const downMap = async ({ style, z }) => {
   const mapName = `style=${style}_z=${z}`
@@ -16,7 +19,6 @@ const downMap = async ({ style, z }) => {
   const dirName = baseDir + mapName
 
   await fs.promises.mkdir(dirName, { recursive: true })
-  const queue = new Queue(20)
 
   for (let y = 0; y < maxIndex; y++) {
     for (let x = 0; x < maxIndex; x++) {
@@ -40,16 +42,24 @@ const downMap = async ({ style, z }) => {
       // doWork()
     }
   }
+}
 
+const main = async() => {
+  // await downMap({ style: 6, z: 1 })
+  // await downMap({ style: 6, z: 2 })
+  // await downMap({ style: 6, z: 3 })
+  // await downMap({ style: 6, z: 4 })
+  // await downMap({ style: 6, z: 5 })
+  // await downMap({ style: 6, z: 6 })
+  // await downMap({ style: 6, z: 7 })
+  // await downMap({ style: 6, z: 8 })
+  await downMap({ style: 6, z: 9 })
+  await downMap({ style: 6, z: 10 })
+  // await downMap({ style: 6, z: 11 })
+  
   queue.start()
 }
 
-// downMap({ style: 6, z: 1 })
-// downMap({ style: 6, z: 2 })
-downMap({ style: 6, z: 3 })
-// downMap({ style: 6, z: 4 })
-// downMap({ style: 6, z: 5 })
-// downMap({ style: 6, z: 6 })
-// downMap({ style: 6, z: 7 })
+main()
 
 // downloadPNG(demoUrl, './', 'file.png')

@@ -13,6 +13,7 @@ const downloadPNG = async (url, dir, fileName) => {
     const len = exist && fs.readFileSync(dest).length
     if (exist && len) {
       console.log("文件已存在, 无需下载", url, dest)
+      resolve(true)
       return
     }
 

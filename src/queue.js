@@ -12,11 +12,13 @@ class Queue {
   }
 
   start() {
+    console.time('total download')
     const totalCount = this._queue.length;
     console.log("🚀 ~ file: queue.js ~ line 16 ~ Queue ~ start ~ totalCount", totalCount)
     const runNext = () => {
       const func = this._queue.shift();
       if (!func) {
+        console.timeEnd('total download')
         return
       }
       const restCount = this._queue.length;
